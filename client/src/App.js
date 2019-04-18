@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.css'
+
 import Home from './components/Home'
 
 class App extends Component {
+constructor(){
+  super();
+  this.state = {
+    user: 'bobby'
+  }
+}
+
+
   render() {
     return (
       <div className="App">
