@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router, Route, Link, IndexRoute } from "react-router-dom";
 
 
 class Navigation extends Component{
@@ -7,24 +8,24 @@ render() {
 return(
     <nav className="site-nav family-sans navbar navbar-expand bg-primary navbar-dark higher">
   <div className="container-fluid">
-    <a href="/" className="navbar-brand">
+    <Link to="/" className="navbar-brand">
       Meeting Log
-    </a>
+    </Link>
     <div className="navbar-nav ml-auto">
 
-    {user &&  (<a className="nav-item nav-link" href="/meetings">
+    {user &&  (<Link to="/meetings"className="nav-item nav-link" >
           meetings
-    </a>) }
-       {!user && ( <a className="nav-item nav-link" href="/login">
+    </Link>) }
+       {!user && ( <Link to ="/login" className="nav-item nav-link" >
           log in
-        </a>)}
+        </Link>)}
        
-        {!user && ( <a className="nav-item nav-link" href="/login">
+        {!user && ( <Link to ="/register"className="nav-item nav-link" >
           register
-        </a>)}
-        {user && ( <a className="nav-item nav-link" href="/login">
+        </Link>)}
+        {user && ( <Link to="/" className="nav-item nav-link" >
           log out
-        </a>)}
+          </Link>)}
         
     </div>
   </div>
