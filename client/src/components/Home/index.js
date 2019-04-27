@@ -6,10 +6,10 @@ render(){
     const {user} = this.props;
     return(
 <div>
-
+<h1>Home Component</h1>
     <h2>hello {user}</h2>
 
-    { user == null && ( 
+    {user == null && ( 
         <div>
     <button type="button" className="btn btn-success">Success</button>
     <button type="button" className="btn btn-danger">Danger</button>
