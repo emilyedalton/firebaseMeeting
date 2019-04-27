@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import firebase from './firebase'
+
 import Welcome from './components/Welcome'
 import Home from './components/Home'
 import Navigation from './components/Navigation';
@@ -13,7 +15,17 @@ constructor(){
   super();
   this.state = {
     user: null,
-  }
+  };
+}
+  componentDidMount(){
+    const ref = firebase.database().ref('user')
+    
+    ref.on('value', snapshot => {
+
+      let FBUser= snapshot.val()
+      this.setState({user: FBUser});
+    })
+  
 }
 
 // we have created a state. capturing the name of the variable in a property. 
