@@ -1,19 +1,22 @@
 import React, {Component} from 'react';
-
+//consturctor has a variable called state, and that is stored in a this variable. Because we are modifying state outside of the
+//original object the this keyword in the handlechange method is not referring to the original state object. 
+//the binding makes the value of the 'this' inside of the handlechange method the same as the 'this' inside of the constructor
 class Register extends Component{
     constructor (){
         super ();
             this.state = {
                 displayName: " ",
                 email: " ",
-                passOne: " ",
-                passTwo: " "
+                passOne: "",
+                passTwo: ""
 
-            }
+            };
+    this.handleChange = this.handleChange.bind(this);
         }
 handleChange(e){
 const itemName = e.target.name;
-const itemValue= e.taget.value;
+const itemValue= e.target.value;
 
 this.setState ({[itemName]:itemValue})
 
