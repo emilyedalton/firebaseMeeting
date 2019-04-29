@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import FormError from '../FormError'
+import FormError from '../FormError';
+import firebase from '../../firebase'
 //consturctor has a variable called state, and that is stored in a this variable. Because we are modifying state outside of the
 //original object the this keyword in the handlechange method is not referring to the original state object. 
 //the binding makes the value of the 'this' inside of the handlechange method the same as the 'this' inside of the constructor
@@ -14,6 +15,8 @@ class Register extends Component{
                 errorMessage: null
             };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
         }
 handleChange(e){
 const itemName = e.target.name;
@@ -27,9 +30,30 @@ if (this.state.passOne !== this.state.passTwo){
 }
 
 }
+
+handleSubmit(e){
+    var registrationInfo={
+        displayName: this.state.displayName,
+        email: this.state.email,
+        password: this.state.passOne
+    }
+e.preventDevault();
+firebase.auth().createUserWithEmailAndPassword(
+    registrationInfo.email,
+    registrationInfo.password
+).catch(error => {
+    if (error.message !== null){
+        this.setState({errorMessage:error.message})
+    }else{
+        this.setState({errorMessage : null})
+    }
+})
+
+
+}
     render () {
     return(
-    <form className="mt-3">
+    <form className="mt-3" onSubmit={this.handleSubmit}>
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-lg-8">
@@ -39,7 +63,7 @@ if (this.state.passOne !== this.state.passTwo){
               <div className="form-row">
               {this.state.errorMessage !== null ? (
                   <FormError theMessage ={this.state.errorMessage}/>
-              ):null}
+              ): null } 
                 <section className="col-sm-12 form-group">
                   <label
                     className="form-control-label sr-only"

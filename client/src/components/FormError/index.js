@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+
 class FormError extends Component{
     render (){
-        const {theMesssage}=this.props;
+        const {theMessage}=this.props;
     return(
      
 
-        <div className="text-secondary font-weight-bold pl-1">
-        {theMesssage}
+        <div className="col-12 alert alert-danger px-3">
+        <p>{theMessage}</p>
         </div>
     )
     }
