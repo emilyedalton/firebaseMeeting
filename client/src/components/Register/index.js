@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import FormError from '../FormError'
 //consturctor has a variable called state, and that is stored in a this variable. Because we are modifying state outside of the
 //original object the this keyword in the handlechange method is not referring to the original state object. 
 //the binding makes the value of the 'this' inside of the handlechange method the same as the 'this' inside of the constructor
@@ -9,8 +10,8 @@ class Register extends Component{
                 displayName: " ",
                 email: " ",
                 passOne: "",
-                passTwo: ""
-
+                passTwo: "",
+                errorMessage: null
             };
     this.handleChange = this.handleChange.bind(this);
         }
@@ -19,6 +20,11 @@ const itemName = e.target.name;
 const itemValue= e.target.value;
 
 this.setState ({[itemName]:itemValue})
+if (this.state.passOne !== this.state.passTwo){
+    this.setState({errorMessage: 'Passwords do not match'})
+} else{
+    this.setState({errorMessage: null});
+}
 
 }
     render () {
@@ -31,6 +37,9 @@ this.setState ({[itemName]:itemValue})
             <div className="card-body">
               <h3 className="font-weight-light mb-3">Register</h3>
               <div className="form-row">
+              {this.state.errorMessage !== null ? (
+                  <FormError theMessage ={this.state.errorMessage}/>
+              ):null}
                 <section className="col-sm-12 form-group">
                   <label
                     className="form-control-label sr-only"
