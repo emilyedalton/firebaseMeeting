@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import FormError from '../FormError';
-import firebase from '../../firebase'
+import firebase from '../Firebase';
 //consturctor has a variable called state, and that is stored in a this variable. Because we are modifying state outside of the
 //original object the this keyword in the handlechange method is not referring to the original state object. 
 //the binding makes the value of the 'this' inside of the handlechange method the same as the 'this' inside of the constructor
@@ -10,8 +10,8 @@ class Register extends Component{
             this.state = {
                 displayName: " ",
                 email: " ",
-                passOne: "",
-                passTwo: "",
+                passOne:"",
+                passTwo:"",
                 errorMessage: null
             };
     this.handleChange = this.handleChange.bind(this);
@@ -22,35 +22,38 @@ handleChange(e){
 const itemName = e.target.name;
 const itemValue= e.target.value;
 
-this.setState ({[itemName]:itemValue})
-if (this.state.passOne !== this.state.passTwo){
-    this.setState({errorMessage: 'Passwords do not match'})
-} else{
-    this.setState({errorMessage: null});
-}
-
-}
-
-handleSubmit(e){
-    var registrationInfo={
-        displayName: this.state.displayName,
-        email: this.state.email,
-        password: this.state.passOne
+this.setState({ [itemName]: itemValue }, () => {
+    if (this.state.passOne !== this.state.passTwo) {
+      this.setState({ errorMessage: 'Passwords no not match' });
+    } else {
+      this.setState({ errorMessage: null });
     }
-e.preventDevault();
-firebase.auth().createUserWithEmailAndPassword(
-    registrationInfo.email,
-    registrationInfo.password
-).catch(error => {
-    if (error.message !== null){
-        this.setState({errorMessage:error.message})
-    }else{
-        this.setState({errorMessage : null})
-    }
-})
-
-
+  });
 }
+
+handleSubmit(e) {
+    var registrationInfo = {
+      displayName: this.state.displayName,
+      email: this.state.email,
+      password: this.state.passOne
+    };
+    e.preventDefault();
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(
+        registrationInfo.email,
+        registrationInfo.password
+      )
+      .catch(error => {
+        if (error.message !== null) {
+          this.setState({ errorMessage: error.message });
+        } else {
+          this.setState({ errorMessage: null });
+        }
+      });
+  }
+
     render () {
     return(
     <form className="mt-3" onSubmit={this.handleSubmit}>
@@ -111,7 +114,7 @@ firebase.auth().createUserWithEmailAndPassword(
                     name="passOne"
                     placeholder="Password"
                     value={this.state.passOne}
-                    onChange ={this.handleChange}
+                    onChange={this.handleChange}
 
                   />
                 </section>
@@ -123,7 +126,7 @@ firebase.auth().createUserWithEmailAndPassword(
                     name="passTwo"
                     placeholder="Repeat Password"
                     value={this.state.passTwo}
-                    onChange ={this.handleChange}
+                    onChange={this.handleChange}
 
                   />
                 </section>

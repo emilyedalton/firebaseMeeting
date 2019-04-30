@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from './firebase'
+import firebase from '../src/components/Firebase'
 
 import Welcome from './components/Welcome'
 import Home from './components/Home'
