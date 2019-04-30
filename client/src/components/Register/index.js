@@ -5,8 +5,8 @@ import firebase from '../Firebase';
 //original object the this keyword in the handlechange method is not referring to the original state object. 
 //the binding makes the value of the 'this' inside of the handlechange method the same as the 'this' inside of the constructor
 class Register extends Component{
-    constructor (){
-        super ();
+    constructor (props){
+        super (props);
             this.state = {
                 displayName: " ",
                 email: " ",
@@ -45,6 +45,9 @@ handleSubmit(e) {
         registrationInfo.email,
         registrationInfo.password
       )
+      .then(() => {
+        this.props.registerUser(registrationInfo.displayName);
+      })
       .catch(error => {
         if (error.message !== null) {
           this.setState({ errorMessage: error.message });

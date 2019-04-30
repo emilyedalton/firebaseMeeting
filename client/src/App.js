@@ -15,18 +15,37 @@ constructor(){
   super();
   this.state = {
     user: null,
+    displayName: null,
+    uid: null
   };
 }
-  componentDidMount(){
-    const ref = firebase.database().ref('user')
-    
-    ref.on('value', snapshot => {
-
-      let FBUser= snapshot.val()
-      this.setState({user: FBUser});
-    })
-  
+componentDidMount() {
+  firebase.auth().onAuthStateChanged(FBUser => {
+    if (FBUser) {
+      this.setState({
+        user: FBUser,
+        displayName: FBUser.displayName,
+        userID: FBUser.uid
+      });
+    }
+  });
 }
+
+registerUser = userName => {
+  firebase.auth().onAuthStateChanged(FBUser => {
+    FBUser.updateProfile({
+      displayName: userName
+    }).then(() => {
+      this.setState({
+        user: FBUser,
+        displayName: FBUser.displayName,
+        userID: FBUser.uid
+      });
+      // navigate('/meetings');
+    });
+  });
+};
+
 
 // we have created a state. capturing the name of the variable in a property. 
   render() {
@@ -36,16 +55,16 @@ constructor(){
           <div>
         <Navigation user ={this.state.user} />
         <h1>Meeting Log</h1>
-        {this.state.user &&<Welcome user ={this.state.user} />}
+        {this.state.user &&<Welcome userName ={this.state.displayName} />}
 
 
 
  
                 {/* Routes to different components */}
                 <Route  exact path="/" render={() => <Home user={this.state.user} />} />
-                <Route path="/login" render={() => <Login user={this.state.user} />} />
-                <Route path="/meetings" render={() => <Meetings user={this.state.user} />} />
-                <Route path="/register" render={() => <Register user={this.state.user} />} />
+                <Route path="/login" render={() => <Login userName={this.state.user} />} />
+                <Route path="/meetings" render={() => <Meetings userName={this.state.user} />} />
+                <Route path="/register" render={() => <Register registerUser={this.registerUser} />} />
                />
                 
 
