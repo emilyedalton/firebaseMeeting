@@ -79,7 +79,7 @@ return <Redirect to ='/login'/>
 
  
                 {/* Routes to different components */}
-                <Route  exact path="/" render={() => <Home user={this.state.user} />} />
+                <Route exact path="/" render={() => <Home user={this.state.displayName} />} />
                 <Route path="/login" render={() => <Login userName={this.state.user} />} />
                 <Route path="/meetings" render={() => <Meetings userName={this.state.user} />} />
                 <Route path="/register" render={() => <Register registerUser={this.registerUser} />} />
