@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Firebase from '../Firebase'
 
 class Meetings extends Component{
     render (){

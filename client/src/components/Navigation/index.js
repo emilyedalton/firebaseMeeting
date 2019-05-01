@@ -4,7 +4,8 @@ import { Router, Route, Link, IndexRoute } from "react-router-dom";
 
 class Navigation extends Component{
 render() {
-    const user = this.props.user;
+    const {user, logOutUser} = this.props;
+
 return(
     <nav className="site-nav family-sans navbar navbar-expand bg-primary navbar-dark higher">
   <div className="container-fluid">
@@ -23,7 +24,7 @@ return(
         {!user && ( <Link to ="/register"className="nav-item nav-link" >
           register
         </Link>)}
-        {user && ( <Link to="/" className="nav-item nav-link" >
+        {user && ( <Link to="/login" className="nav-item nav-link" onClick={e =>logOutUser(e)} >
           log out
           </Link>)}
         

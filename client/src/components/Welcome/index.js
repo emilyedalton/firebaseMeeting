@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import { Router, Route, Link, IndexRoute } from "react-router-dom";
+
 
 class Welcome extends Component{
     render (){
-    const {userName} = this.props;
+    const {userName, logOutUser} = this.props;
     return(
      
         
