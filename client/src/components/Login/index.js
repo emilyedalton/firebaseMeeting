@@ -58,7 +58,9 @@ return
               <div className="card bg-light">
                 <div className="card-body">
                   <h3 className="font-weight-light mb-3">Log in</h3>
-                  <section className="form-group">
+                  <section className="form-group"> {this.state.errorMessage !== null ? (
+                  <FormError theMessage ={this.state.errorMessage}/>
+              ): null } 
                     <label
                       className="form-control-label sr-only"
                       htmlFor="Email" >
