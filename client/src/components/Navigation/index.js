@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, IndexRoute } from "react-router-dom";
+import { Link } from '@reach/router';
 
 
 class Navigation extends Component{

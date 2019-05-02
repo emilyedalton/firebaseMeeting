@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {Redirect} from "react-router-dom";
+import { Router } from '@reach/router';
+// import {Redirect} from "react-router-dom";
 import FormError from '../FormError';
 import firebase from '../Firebase';
 
@@ -38,7 +38,8 @@ handleSubmit(e) {
         registrationInfo.password
       )
       .then(() => {
-return <Redirect to ={'/meetings'}/>
+return 
+{/* <Redirect to ={'/meetings'}/> */}
       })
       .catch(error => {
         if (error.message !== null) {

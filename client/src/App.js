@@ -8,9 +8,8 @@ import Navigation from './components/Navigation';
 import Login from './components/Login/'
 import Meetings from './components/Meetings/'
 import Register from './components/Register/'
+import { Router } from '@reach/router';
 
-import {BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {Redirect} from "react-router-dom";
 class App extends Component {
 constructor(){
   super();
@@ -50,12 +49,12 @@ registerUser = userName => {
 logOutUser = e => {
   e.preventDefalut()
   this.setState({
-    displayName:null,
-    userId:null, 
-    user: null
+    user: null,
+    displayName: null,
+    uid: null
   });
-  firebase.auth().signOut().then (() => {
-return <Redirect to ='/login'/>
+firebase.auth().signOut().then (() => {
+  // navigate ('/login')
   });
 }
 
@@ -66,11 +65,9 @@ return <Redirect to ='/login'/>
   render() {
     return (
       <div className="App">
-        <Router>
-          <div>
         <Navigation 
         user ={this.state.user}
-         logOutUser = {this.state.logOutUser}
+        logOutUser = {this.logOutUser}
         />
         <h1>Meeting Log</h1>
         {this.state.user &&<Welcome userName ={this.state.displayName} />}
@@ -79,21 +76,21 @@ return <Redirect to ='/login'/>
 
  
                 {/* Routes to different components */}
-                <Route exact path="/" render={() => <Home user={this.state.displayName} />} />
-                <Route path="/login" render={() => <Login userName={this.state.user} />} />
-                <Route path="/meetings" render={() => <Meetings userName={this.state.user} />} />
-                <Route path="/register" render={() => <Register registerUser={this.registerUser} />} />
-               />
+<Router>
+              < Home path="/" user={this.state.displayName} />
+                <Login path="/login" userName={this.state.user}  />
+                <Meetings path="/meetings" userName={this.state.user} />
+                <Register path="/register" registerUser={this.registerUser} />
+              
+ </Router>
                 
-
 
 
 
 </div>
 
 
-  </Router>
-      </div>
+      
     );
   }
 }

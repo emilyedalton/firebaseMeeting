@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Router, Route, Link, IndexRoute } from "react-router-dom";
+import { Router } from '@reach/router';
 
 
 class Welcome extends Component{
