@@ -27,6 +27,34 @@ componentDidMount() {
         displayName: FBUser.displayName,
         userID: FBUser.uid
       });
+const meetingsRef = firebase
+.database()
+.ref('meetings/'+ FBUser.uid);
+
+meetingsRef.on ('value', snapshot =>{
+
+  let meetings = snapshot.val();
+  let meetingsList = [];
+
+  for(let item in meetings) {
+meetingsList.push({
+  meetingID: item,
+  meetingName: meetings[item].meetingName
+});
+
+}
+
+this.setState({
+  meetings: meetingsList,
+  howManyMeetings: meetingsList.length
+});
+
+});
+
+      
+    } else {
+this.setState({user:null});
+
     }
   });
 }
@@ -64,7 +92,6 @@ const ref = firebase
 .database()
 .ref(`meetings/${this.state.user.uid}`);
 ref.push({meetingName: meetingName})
-
 
 }
 

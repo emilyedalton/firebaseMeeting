@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import firebase from '../Firebase'
+import PlzLog from '../PlzLog/'
 
 class Meetings extends Component{
     constructor (props){
         super (props);
             this.state = {
-                meetingName: " "
+                meetingName: " ",
             };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,8 +44,17 @@ return
       });
   }
     render(){
-
+      
+        const {userName} = this.props;
+   
+               
     return( 
+        <div>
+
+        {userName == null && ( 
+            <PlzLog/>
+                   )}
+                   
         <div className="container mt-4">
         <div className="row justify-content-center">
           <div className="col-md-8 text-center">
@@ -81,7 +91,8 @@ return
           </div>
         </div>
         </div>
-    )
+        </div>
+    )}
     };
-  }
+  
 export default Meetings;
