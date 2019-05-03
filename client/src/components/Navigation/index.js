@@ -24,9 +24,13 @@ return(
         {!user && ( <Link to ="/register"className="nav-item nav-link" >
           register
         </Link>)}
-        {user && ( <Link to="/login" className="nav-item nav-link" onClick={e =>logOutUser(e)} >
-          log out
-          </Link>)}
+        {user && ( <Link
+                className="nav-item nav-link"
+                to="/login"
+                onClick={e => logOutUser(e)}
+              >
+                log out
+              </Link>)}
         
     </div>
   </div>

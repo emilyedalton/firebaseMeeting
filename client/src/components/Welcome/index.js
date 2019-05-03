@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
-import { Router } from '@reach/router';
+import { Link } from '@reach/router';
 
 
 class Welcome extends Component{
     render (){
     const {userName, logOutUser} = this.props;
     return(
-     
-        
-        <div className="text-secondary font-weight-bold pl-1">
-       Welcome {userName}
-        </div>
+    <div>
+        {userName == null && ( 
+ <Link to ="/login" className="nav-item nav-link">
+                  log in </Link>
+        )}
+        {userName && ( <div>Welcome{userName}</div>
+        )}
+    </div>
     )
     }
 }
+    
 export default Welcome;

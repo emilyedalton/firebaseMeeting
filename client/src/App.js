@@ -8,7 +8,7 @@ import Navigation from './components/Navigation';
 import Login from './components/Login/'
 import Meetings from './components/Meetings/'
 import Register from './components/Register/'
-import { Router } from '@reach/router';
+import { Router, navigate } from '@reach/router';
 
 class App extends Component {
 constructor(){
@@ -41,20 +41,20 @@ registerUser = userName => {
         displayName: FBUser.displayName,
         userID: FBUser.uid
       });
-      // navigate('/meetings');
+      navigate('/meetings');
     });
   });
 };
 
 logOutUser = e => {
-  e.preventDefalut()
+  e.preventDefault()
   this.setState({
-    user: null,
-    displayName: null,
-    uid: null
+      displayName: null,
+      userID: null,
+      user: null
   });
 firebase.auth().signOut().then (() => {
-  // navigate ('/login')
+  navigate ('/login')
   });
 }
 
@@ -69,15 +69,18 @@ firebase.auth().signOut().then (() => {
         user ={this.state.user}
         logOutUser = {this.logOutUser}
         />
-        <h1>Meeting Log</h1>
-        {this.state.user &&<Welcome userName ={this.state.displayName} />}
-
+        {this.state.user && (
+          <Welcome
+            userName={this.state.displayName}
+            logOutUser={this.logOutUser}
+          />
+        )}
 
 
  
                 {/* Routes to different components */}
 <Router>
-              < Home path="/" user={this.state.displayName} />
+              < Home path="/"  />
                 <Login path="/login" userName={this.state.user}  />
                 <Meetings path="/meetings" userName={this.state.user} />
                 <Register path="/register" registerUser={this.registerUser} />
