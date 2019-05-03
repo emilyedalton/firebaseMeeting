@@ -57,7 +57,16 @@ firebase.auth().signOut().then (() => {
   navigate ('/login')
   });
 }
+//this method builds references in firebase
+//we will push the user id
+addMeeting = meetingName =>{
+const ref = firebase
+.database()
+.ref(`meetings/${this.state.user.uid}`);
+ref.push({meetingName: meetingName})
 
+
+}
 
 
   
@@ -82,7 +91,9 @@ firebase.auth().signOut().then (() => {
 <Router>
               < Home path="/"  />
                 <Login path="/login" userName={this.state.user}  />
-                <Meetings path="/meetings" userName={this.state.user} />
+                <Meetings path="/meetings" 
+                userName={this.state.user}
+                addMeeting ={this.addMeeting} />
                 <Register path="/register" registerUser={this.registerUser} />
               
  </Router>
