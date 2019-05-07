@@ -16,7 +16,7 @@ constructor(){
   this.state = {
     user: null,
     displayName: null,
-    uid: null
+    userID: null
   };
 }
 componentDidMount() {
@@ -121,7 +121,8 @@ ref.push({meetingName: meetingName})
                 <Meetings path="/meetings" 
                 userName={this.state.user}
                 addMeeting ={this.addMeeting}
-                meetings = {this.state.meetings} />
+                meetings = {this.state.meetings} 
+                userID={this.state.userID}/>
                 <Register path="/register" registerUser={this.registerUser} />
               
  </Router>

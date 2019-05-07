@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Router } from '@reach/router';
 
 class Home extends Component {
 
