@@ -120,7 +120,8 @@ ref.push({meetingName: meetingName})
                 <Login path="/login" userName={this.state.user}  />
                 <Meetings path="/meetings" 
                 userName={this.state.user}
-                addMeeting ={this.addMeeting} />
+                addMeeting ={this.addMeeting}
+                meetings = {this.state.meetings} />
                 <Register path="/register" registerUser={this.registerUser} />
               
  </Router>
