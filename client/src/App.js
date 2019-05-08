@@ -8,7 +8,9 @@ import Navigation from './components/Navigation';
 import Login from './components/Login/'
 import Meetings from './components/Meetings/'
 import Register from './components/Register/'
+import CheckIn from './components/CheckIn';
 import { Router, navigate } from '@reach/router';
+
 
 class App extends Component {
 constructor(){
@@ -123,6 +125,8 @@ ref.push({meetingName: meetingName})
                 addMeeting ={this.addMeeting}
                 meetings = {this.state.meetings} 
                 userID={this.state.userID}/>
+                <CheckIn
+                path ="/checkin/:userID/:meetingID"/>
                 <Register path="/register" registerUser={this.registerUser} />
               
  </Router>

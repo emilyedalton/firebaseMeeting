@@ -87,7 +87,11 @@ return
                     </div>
                   </div>
                 </form>
-                <div className = "col-11 col-md-6 text-center">
+               
+                </div>
+             
+                </div>
+                <div className = "col">
                 <div className ="card border-top-0 rounded-0">
                 {this.props.meetings && this.props.meetings.length ?(<div className ="card-body py-2">
                 <h4 className="card-title font-weight-light n-0">Meetings:</h4> </div>
@@ -100,8 +104,6 @@ return
                   </div>
 
                 )}
-                </div>
-                </div>
               </div>
             </div>
           </div>
