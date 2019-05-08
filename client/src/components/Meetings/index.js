@@ -100,7 +100,8 @@ return
                   <div className = "list-group list-group-flush">
                   <MeetingList 
                   meetings ={this.props.meetings}
-                  userID ={this.props.userID}/>
+                  userID ={this.props.userID}
+                  updateMeeting={this.props.updateMeeting}/>
                   </div>
 
                 )}

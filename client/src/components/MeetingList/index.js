@@ -9,15 +9,36 @@ import { Router, navigate } from '@reach/router';
 class MeetingList extends Component{
     constructor (props){
         super (props);
+        this.state = {
+            meetingValue: ""
+          }
         this.deleteMeeting = this.deleteMeeting.bind(this);
+        this.updateMeeting = this.updateMeeting.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+
 
     }
+    handleChange(e){
+        const meetingValue= e.target.defaultValue;
+        
+        this.setState({ [meetingValue]: this.state.meetingValue}
+        )}
+
     deleteMeeting = (e, whichMeeting) => {
         e.preventDefault();
         const ref = firebase
           .database()
           .ref(`meetings/${this.props.userID}/${whichMeeting}`);
         ref.remove();
+      };
+      updateMeeting = (e, whichMeeting) => {
+        e.preventDefault();
+               const ref = firebase
+          .database()
+          .ref(`meetings/${this.props.userID}/${whichMeeting}`);
+        ref.update({
+            meetingValue: this.state.meetingValue,       
+         });
       };
     render (){
     const {meetings} = this.props;
@@ -44,11 +65,23 @@ class MeetingList extends Component{
             >
              Check In
              </button>
+
+             <button
+              className="btn btn-sm btn-outline-secondary"
+              title="Update Meeting"
+              onClick={e => this.updateMeeting(e,item.meetingID)}
+            >
+             update
+             </button>
 </section>
-            <section className ="pl-3 text-left align-self-center">
-            {item.meetingName}
+            <input className ="pl-3 text-left align-self-center"
+            type ="text"
+            defaultValue= {item.meetingName}
+            onChange={this.handleChange}
+
             
-            </section>
+            >
+            </input>
             
             </div>
         );
