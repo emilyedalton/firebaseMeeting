@@ -10,19 +10,18 @@ class MeetingList extends Component{
     constructor (props){
         super (props);
         this.state = {
-            meetingValue: ""
-          }
-        this.deleteMeeting = this.deleteMeeting.bind(this);
-        this.updateMeeting = this.updateMeeting.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-
+            name: " "
+         
 
     }
+    this.deleteMeeting = this.deleteMeeting.bind(this);
+    this.updateMeeting = this.updateMeeting.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    }
     handleChange(e){
-        const meetingValue= e.target.defaultValue;
-        
-        this.setState({ [meetingValue]: this.state.meetingValue}
-        )}
+        // const meetingName= e.target.defaultValue;
+        this.setState({ name: e.target.value })
+        }
 
     deleteMeeting = (e, whichMeeting) => {
         e.preventDefault();
@@ -37,7 +36,7 @@ class MeetingList extends Component{
           .database()
           .ref(`meetings/${this.props.userID}/${whichMeeting}`);
         ref.update({
-            meetingValue: this.state.meetingValue,       
+            meetingName: this.state.name,       
          });
       };
     render (){
