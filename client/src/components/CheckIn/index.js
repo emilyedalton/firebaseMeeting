@@ -24,15 +24,23 @@ this.setState({ [itemName]: itemValue }
 handleSubmit(e) {
     e.preventDefault();
 
-  const ref = firebase
-  .database()
-  .ref(`meetings/${this.props.userID}/${this.props.MeetingID}/attendees`);
-  ref.push ({
-attendeeName: this.state.name,
-attendeeEmail: this.state.email
-  })
-  navigate(`meetings/${this.props.userID}/${this.props.MeetingID}`)
-  }
+    const ref = firebase
+    .database()
+    .ref(
+      `meetings/${this.props.userID}/${
+        this.props.meetingID
+      }/attendees`
+    );
+  ref.push({
+    attendeeName: this.state.displayName,
+    attendeeEmail: this.state.email,
+    star: false
+  });
+  navigate(
+    `/attendees/${this.props.userID}/${this.props.meetingID}`
+  );
+}
+
     render (){
     return( 
       <form className="mt-3" onSubmit={this.handleSubmit}>

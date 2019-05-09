@@ -9,6 +9,8 @@ import Login from './components/Login/'
 import Meetings from './components/Meetings/'
 import Register from './components/Register/'
 import CheckIn from './components/CheckIn';
+import Attendees from './components/Attendees'
+import AttendeesList from './components/AttendeesList';
 import { Router, navigate } from '@reach/router';
 
 
@@ -98,6 +100,7 @@ ref.push({meetingName: meetingName})
 }
 
 
+
   
 // we have created a state. capturing the name of the variable in a property. 
   render() {
@@ -128,6 +131,8 @@ ref.push({meetingName: meetingName})
                 <CheckIn
                 path ="/checkin/:userID/:meetingID"/>
                 <Register path="/register" registerUser={this.registerUser} />
+                <Attendees path="/attendees/:userID/:meetingID"
+                 adminUser={this.state.userID}/>
               
  </Router>
                 
