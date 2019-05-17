@@ -10,23 +10,23 @@ class AttendeesList extends Component {
 
   render() {
     const admin =
-      this.props.adminUser === this.props.userID ? true : false;
+    this.props.adminUser === this.props.userID ? true : false;
     const attendees = this.props.attendees;
     const myAttendees = attendees.map(item => {
       return (
         <div
-          className="col-8 col-sm-6 col-md-4 col-lg-3 mb-2 p-0 px-1"
+          className="col-6"
           key={item.attendeeID}
         >
-          <div className="card ">
+          <div className="card w-100">
             <div
               className={
-                'card-body px-3 py-2 d-flex align-items-center ' +
+                'card w-100 ' +
                 (admin ? '' : 'justify-content-center')
               }
             >
               {admin && (
-                <div className="btn-group pr-2">
+                <div className="">
                   <button
                     className="btn btn-sm btn-outline-secondary"
                     tite="Delete Attendee"
@@ -41,8 +41,30 @@ class AttendeesList extends Component {
                   </button>
                 </div>
               )}
+ <div className="input-group input-group-sm">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="meetingName"
+                      placeholder="Attendee name"
+                      aria-describedby="buttonAdd"
+                      value ={item.attendeeName}
+                      onChange={this.handleChange}
+                    />
+                     <input
+                      type="text"
+                      className="form-control"
+                      name="meetingName"
+                      placeholder="Question 1"
+                      aria-describedby="buttonAdd"
+                      value ={item.attendeeq1}
+                      onChange={this.handleChange}
+                    />
+                    </div>
+              <div>{item.attendeeName} 
+                 {item.attendeeq1}  </div>
 
-              <div>{item.attendeeName}</div>
+
             </div>
           </div>
         </div>

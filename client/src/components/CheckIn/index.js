@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { Router, navigate } from '@reach/router';
-import FormError from '../FormError';
+import { navigate } from '@reach/router';
 import firebase from '../Firebase';
 
 class CheckIn extends Component{
@@ -8,7 +7,11 @@ class CheckIn extends Component{
         super (props);
             this.state = {
               displayName:" ",
-              email: " "
+              email: " ",
+              q1: " ",
+              q2: " "
+
+
             };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,6 +37,10 @@ handleSubmit(e) {
   ref.push({
     attendeeName: this.state.displayName,
     attendeeEmail: this.state.email,
+    attendeeq1: this.state.q1,
+    attendeeq2: this.state.q2,
+
+
     star: false
   });
   navigate(
@@ -55,8 +62,9 @@ handleSubmit(e) {
                 className="form-control-label sr-only"
                 htmlFor="displayName"
               >
-                Name
+                
               </label>
+              Name
               <input
                 required
                 className="form-control"
@@ -67,14 +75,11 @@ handleSubmit(e) {
                 value ={this.state.displayName}
                 onChange ={this.handleChange}
               />
-            </section>
-            <section className="form-group">
-              <label
-                className="form-control-label sr-only"
-                htmlFor="Email"
-              >
-                Email
-              </label>
+           
+              
+             
+              Email
+
               <input
                 required
                 className="form-control"
@@ -83,6 +88,26 @@ handleSubmit(e) {
                 name="email"
                 placeholder="Email"
                 value ={this.state.email}
+                onChange ={this.handleChange}
+              /> Working Title
+                  <input
+                required
+                className="form-control"
+                type="text"
+                id="email"
+                name="q1"
+                placeholder="Working Title"
+                value ={this.state.q1}
+                onChange ={this.handleChange}
+              /> Desription
+                   <input
+                required
+                className="form-control"
+                type="text"
+                id="email"
+                name="q2"
+                placeholder="Description"
+                value ={this.state.q2}
                 onChange ={this.handleChange}
               />
             </section>

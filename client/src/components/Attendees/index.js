@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import firebase from '../Firebase';
 import AttendeesList from '../AttendeesList';
+// import Profile from '../Profile';
+
 
 class Attendees extends Component {
   constructor(props) {
@@ -26,7 +28,11 @@ class Attendees extends Component {
         attendeesList.push({
           attendeeID: item,
           attendeeName: attendees[item].attendeeName,
-          attendeeEmail: attendees[item].attendeeEmail
+          attendeeEmail: attendees[item].attendeeEmail,
+          attendeeq1: attendees[item].attendeeq1,
+          attendeeq2: attendees[item].attendeeq1
+
+
         });
       }
       this.setState({
@@ -51,6 +57,12 @@ class Attendees extends Component {
           adminUser={this.props.adminUser}
           attendees={this.state.displayAttendees}
         />
+     {/* <Profile
+      userID={this.props.userID}
+      meetingID={this.props.meetingID}
+      adminUser={this.props.adminUser}
+      attendees={this.state.displayAttendees}/> */}
+
       </div>
     );
   }
