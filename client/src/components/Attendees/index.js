@@ -49,6 +49,10 @@ class Attendees extends Component {
             <h1 className="font-weight-light text-center">
               Attendees
             </h1>
+            <div className="card bg-light mb-4">
+            <div className="card-body text-center"></div>
+            <input type="text" name="searchQuery" value={this.state.searchQuery} placeholder="Search Attendees" className="form-control" onChange={this.handleChange}></input>
+            </div>
           </div>
         </div>
         <AttendeesList
