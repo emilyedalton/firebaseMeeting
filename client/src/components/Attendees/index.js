@@ -8,9 +8,14 @@ class Attendees extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      searchQuery: '',
       displayAttendees: []
     };
+    this.handleChange=this.handleChange.bind(this);
+
   }
+ 
+  
 
   componentDidMount() {
     const ref = firebase
@@ -21,6 +26,7 @@ class Attendees extends Component {
         }/attendees`
       );
 
+      
     ref.on('value', snapshot => {
       let attendees = snapshot.val();
       let attendeesList = [];
@@ -41,7 +47,16 @@ class Attendees extends Component {
     });
   }
 
+  handleChange(e){
+    const itemName = e.target.name;
+    const itemValue= e.target.value;
+    
+    this.setState({ [itemName]: itemValue }
+    )}
+ 
   render() {
+    const dataFilter = item => item.attendeeName.toLowerCase().match(this.state.searchQuery.toLowerCase())&& true;
+    const filteredAttendees= this.state.displayAttendees.filter(dataFilter);
     return (
       <div className="container mt-4">
         <div className="row justify-content-center">
@@ -51,7 +66,13 @@ class Attendees extends Component {
             </h1>
             <div className="card bg-light mb-4">
             <div className="card-body text-center"></div>
-            <input type="text" name="searchQuery" value={this.state.searchQuery} placeholder="Search Attendees" className="form-control" onChange={this.handleChange}></input>
+            <input 
+            type="text" 
+            name="searchQuery" 
+            value={this.state.searchQuery} 
+            placeholder="Search Attendees" 
+            className="form-control" 
+            onChange={this.handleChange}/>
             </div>
           </div>
         </div>
@@ -59,7 +80,8 @@ class Attendees extends Component {
           userID={this.props.userID}
           meetingID={this.props.meetingID}
           adminUser={this.props.adminUser}
-          attendees={this.state.displayAttendees}
+          // attendees={this.state.displayAttendees}
+          attendees={filteredAttendees}
         />
      {/* <Profile
       userID={this.props.userID}
