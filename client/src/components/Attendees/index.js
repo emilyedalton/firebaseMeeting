@@ -12,10 +12,16 @@ class Attendees extends Component {
       displayAttendees: []
     };
     this.handleChange=this.handleChange.bind(this);
+    this.resetQuery=this.resetQuery.bind(this);
 
   }
  
-  
+  resetQuery(){
+    this.setState({
+      searchQuery:''
+    })
+
+  }
 
   componentDidMount() {
     const ref = firebase
@@ -65,7 +71,9 @@ class Attendees extends Component {
               Attendees
             </h1>
             <div className="card bg-light mb-4">
-            <div className="card-body text-center"></div>
+            <div className="card-body text-center"/>
+            <div className="input-group input-group-lg">
+           
             <input 
             type="text" 
             name="searchQuery" 
@@ -73,9 +81,14 @@ class Attendees extends Component {
             placeholder="Search Attendees" 
             className="form-control" 
             onChange={this.handleChange}/>
-            </div>
+         <div className="input-group-append">
+         <buton className="btn btn-sm btn-outline-info" title="reset search" onClick={()=>this.resetQuery()}></buton>
+         </div>
           </div>
+          </div>
+            </div>
         </div>
+
         <AttendeesList
           userID={this.props.userID}
           meetingID={this.props.meetingID}
